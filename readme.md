@@ -4,16 +4,28 @@ Command-Line Interface for [zatch.ru api](https://zatch.ru).
 
 ## Install
 
-### with Go cli
+### Linux
 
 ```bash
-go install github.com/tsivinsky/zatch-cli@latest
+curl -L https://github.com/tsivinsky/zatch-cli/releases/latest/download/zatch_linux -o zatch && chmod +x zatch
 ```
 
-### with Git
+### Windows
 
 ```bash
-git clone https://github.com/tsivinsky/zatch-cli && cd zatch-cli && go build -o zatch && chmod +x zatch && sudo cp zatch /usr/bin/zatch
+curl -L https://github.com/tsivinsky/zatch-cli/releases/latest/download/zatch_windows.exe -o zatch && chmod +x zatch
+```
+
+### MacOS (intel)
+
+```bash
+curl -L https://github.com/tsivinsky/zatch-cli/releases/latest/download/zatch_macos -o zatch && chmod +x zatch
+```
+
+### MacOS (arm)
+
+```bash
+curl -L https://github.com/tsivinsky/zatch-cli/releases/latest/download/zatch_macos_arm -o zatch && chmod +x zatch
 ```
 
 ## Usage
