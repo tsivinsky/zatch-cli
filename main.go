@@ -25,6 +25,10 @@ type UrlResponseBody struct {
 	ShortId string `json:"short_id"`
 }
 
+type ErrorUrlResponseBody struct {
+	Message string `json:"message"`
+}
+
 func main() {
 	flag.StringVar(&shortName, "name", "", "--name custom-url-name")
 	flag.UintVar(&autoDelete, "auto-delete", 0, "--auto-delete 30")
@@ -71,6 +75,22 @@ func createShortUrl(body UrlRequestBody) (*UrlResponseBody, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+
+	if resp.StatusCode >= 400 {
+		d, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return nil, err
+		}
+
+		var data *ErrorUrlResponseBody
+		err = json.Unmarshal(d, &data)
+		if err != nil {
+			return nil, err
+		}
+
+		fmt.Println(data.Message)
+		os.Exit(1)
+	}
 
 	respData, err := io.ReadAll(resp.Body)
 	if err != nil {
